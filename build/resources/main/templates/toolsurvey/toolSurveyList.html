@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content" class="container my-3">
+    <h2>설문 목록</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>닉네임</th>
+            <th>개발도구</th>
+            <th>팀방식</th>
+            <th>경험수준</th>
+            <th>비고</th>
+            <th>등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tsDto : ${ToolSurveyDtoList}">
+            <td th:text="${tsDto.nickname}">닉네임</td>
+            <td th:text="${tsDto.preferredTool}">개발도구</td>
+            <td th:text="${tsDto.teamMode}">팀방식</td>
+            <td th:text="${tsDto.experience}">경험수준</td>
+            <td th:text="${tsDto.note}">비고</td>
+            <td th:text="${#temporals.format(tsDto.created, 'yyyy-MM-dd HH:mm:ss')}">등록일</td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/toolSurvey/create}" class="btn btn-primary">설문 등록</a>
+</div>
+</html>
