@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content" class="container my-3">
+    <h2>설문 등록</h2>
+    <form th:action="@{/toolSurvey/create}" method="post" th:object="${toolSurveyDto}">
+        <div class="mb-3">
+            <label for="nickname" class="form-label">닉네임</label>
+            <input th:field="*{nickname}" type="text" class="form-control" id="nickname" name="nickname" placeholder="제목을 입력하세요">
+            <p class="filedError" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">오류</p>
+        </div>
+
+        <div>
+            <div>개발도구</div>
+            <select th:field="*{preferredTool}">
+                <option th:each="preferredTool : ${PreferredToolEnum}" th:value="${preferredTool}" th:text="${preferredTool}"></option>
+            </select>
+            <p class="filedError" th:if="${#fields.hasErrors('preferredTool')}" th:errors="*{preferredTool}">오류</p>
+        </div>
+
+        <div class="mb-3">
+            <label for="teamMode" class="form-label">팀방식</label>
+            <input th:field="*{teamMode}" type="text" class="form-control" id="teamMode" name="teamMode" placeholder="제목을 입력하세요">
+            <p class="filedError" th:if="${#fields.hasErrors('teamMode')}" th:errors="*{teamMode}">오류</p>
+        </div>
+
+        <div>
+            <div>경험수준</div>
+            <div th:each="experience : ${ExprienceEnum}" class="form-check form-check-inline">
+                <input type="radio" th:field="*{experience}" th:value="${experience}"
+                       class="form-check-input">
+                <label class="form-check-label" th:for="${#ids.prev('experience')}"
+                       th:text="${experience}"></label>
+            </div>
+            <p class="filedError" th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}">오류</p>
+        </div>
+
+        <div class="mb-3">
+            <label for="note" class="form-label">비고</label>
+            <textarea th:field="*{note}" th:value="${note}" class="form-control" id="note" name="note" rows="10" placeholder="내용을 입력하세요"></textarea>
+            <p class="filedError" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">오류</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">설문 등록</button>
+    </form>
+</div>
+</html>
+
