@@ -1,0 +1,63 @@
+<html layout:decorate="~{layouts/layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2 class="border-bottom py-2">📝 이력서 작성</h2>
+    <form th:action="@{/resume/create}" th:object="${resumeDto}" method="post">
+
+        <!-- 이름 (Name) -->
+        <div class="mb-3">
+            <label for="name" class="form-label">이름</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="성명을 입력하세요">
+            <div th:if="${#fields.hasErrors('name')}" class="text-danger mt-1">
+                <p th:errors="*{name}"></p>
+            </div>
+        </div>
+
+        <!-- 전화번호 (Phone) -->
+        <div class="mb-3">
+            <label for="phone" class="form-label">전화번호</label>
+            <input type="text" th:field="*{phone}" class="form-control" placeholder="010-XXXX-XXXX">
+            <div th:if="${#fields.hasErrors('phone')}" class="text-danger mt-1">
+                <p th:errors="*{phone}"></p>
+            </div>
+        </div>
+
+        <!-- 이메일 (Email) -->
+        <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" th:field="*{email}" class="form-control" placeholder="example@domain.com">
+            <div th:if="${#fields.hasErrors('email')}" class="text-danger mt-1">
+                <p th:errors="*{email}"></p>
+            </div>
+        </div>
+
+        <!-- 주요 기술 스택 (Tech Stack) -->
+        <div class="mb-3">
+            <label for="techStack" class="form-label">주요 기술 스택 (쉼표로 구분)</label>
+            <textarea th:field="*{techStack}" class="form-control" rows="3" placeholder="예: Java, Spring Boot, JPA, Thymeleaf"></textarea>
+            <div th:if="${#fields.hasErrors('techStack')}" class="text-danger mt-1">
+                <p th:errors="*{techStack}"></p>
+            </div>
+        </div>
+
+        <!-- 경력 사항 (Career Details) -->
+        <div class="mb-3">
+            <label for="careerDetails" class="form-label">경력 사항</label>
+            <textarea th:field="*{careerDetails}" class="form-control" rows="5" placeholder="회사명, 직책, 기간, 주요 업무를 상세히 입력하세요."></textarea>
+            <div th:if="${#fields.hasErrors('careerDetails')}" class="text-danger mt-1">
+                <p th:errors="*{careerDetails}"></p>
+            </div>
+        </div>
+
+        <!-- 자기소개 (Self Introduction) -->
+        <div class="mb-3">
+            <label for="selfIntroduction" class="form-label">자기소개</label>
+            <textarea th:field="*{selfIntroduction}" class="form-control" rows="8" placeholder="자신을 자유롭게 소개하세요."></textarea>
+            <div th:if="${#fields.hasErrors('selfIntroduction')}" class="text-danger mt-1">
+                <p th:errors="*{selfIntroduction}"></p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary my-2">이력서 제출</button>
+    </form>
+</div>
+</html>

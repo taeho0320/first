@@ -1,0 +1,36 @@
+<html layout:decorate="~{layouts/layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2 class="border-bottom py-2">📄 작성된 이력서 확인</h2>
+    <div th:if="${resume}" class="card my-3 shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 th:text="${resume.name} + '의 이력서'"></h4>
+            <small>작성이 완료되었습니다.</small>
+        </div>
+        <div class="card-body">
+
+            <h5 class="mt-4 border-bottom pb-2 text-primary">기본 정보</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3"><strong>전화번호:</strong> <span th:text="${resume.phone}"></span></div>
+                <div class="col-md-6 mb-3"><strong>이메일:</strong> <span th:text="${resume.email}"></span></div>
+            </div>
+
+            <h5 class="mt-4 border-bottom pb-2 text-primary">주요 기술 스택</h5>
+            <p class="border p-3 bg-light rounded" th:text="${resume.techStack}"></p>
+
+            <h5 class="mt-4 border-bottom pb-2 text-primary">경력 사항</h5>
+            <!-- 줄 바꿈을 유지하기 위해 pre-wrap 스타일 사용 -->
+            <div class="border p-3 rounded" style="white-space: pre-wrap;" th:text="${resume.careerDetails}"></div>
+
+            <h5 class="mt-4 border-bottom pb-2 text-primary">자기소개</h5>
+            <!-- 줄 바꿈을 유지하기 위해 pre-wrap 스타일 사용 -->
+            <div class="border p-3 rounded" style="white-space: pre-wrap;" th:text="${resume.selfIntroduction}"></div>
+
+        </div>
+    </div>
+    <div th:unless="${resume}" class="alert alert-warning">
+        작성된 이력서 내용이 없습니다.
+    </div>
+    <a th:href="@{/resume/create}" class="btn btn-secondary mt-3 me-2">새 이력서 작성</a>
+    <a href="/" class="btn btn-outline-primary mt-3">홈으로 돌아가기</a>
+</div>
+</html>
