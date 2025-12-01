@@ -1,4 +1,8 @@
-<html layout:decorate="~{layouts/layout}">
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <div layout:fragment="content" class="container my-3">
     <h2 class="border-bottom py-2">📝 이력서 작성</h2>
     <form th:action="@{/resume/create}" th:object="${resumeDto}" method="post">
@@ -60,4 +64,5 @@
         <button type="submit" class="btn btn-primary my-2">이력서 제출</button>
     </form>
 </div>
+
 </html>
