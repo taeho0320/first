@@ -1,4 +1,9 @@
-<html layout:decorate="~{layouts/layout}">
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+    
 <div layout:fragment="content" class="container my-3">
     <h2 class="border-bottom py-2">📄 작성된 이력서 확인</h2>
     <div th:if="${resume}" class="card my-3 shadow">
@@ -33,4 +38,5 @@
     <a th:href="@{/resume/create}" class="btn btn-secondary mt-3 me-2">새 이력서 작성</a>
     <a href="/" class="btn btn-outline-primary mt-3">홈으로 돌아가기</a>
 </div>
+
 </html>
