@@ -22,9 +22,9 @@ class QuestionServiceTest {
                     .subject("질문 제목 " + i)
                     .content("질문 내용 " + i)
                     .build();
-            questionService.create(questionDto);
+           // questionService.create(questionDto);
         }
-        System.out.println("==== Size : " + questionService.getQuestionList().size());
+        //System.out.println("==== Size : " + questionService.getQuestionList().size());
 
 
     }
