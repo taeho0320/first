@@ -38,5 +38,5 @@ public class Resume extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String selfIntroduction; // 자기소개
 
-
+    private String picturePath;
 }

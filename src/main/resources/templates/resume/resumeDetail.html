@@ -23,23 +23,18 @@
             <p class="border p-3 bg-light rounded" th:text="${resume.techStack}"></p>
 
             <h5 class="mt-4 border-bottom pb-2 text-primary">경력 사항</h5>
+            <!-- 줄 바꿈을 유지하기 위해 pre-wrap 스타일 사용 -->
             <div class="border p-3 rounded" style="white-space: pre-wrap;" th:text="${resume.careerDetails}"></div>
 
             <h5 class="mt-4 border-bottom pb-2 text-primary">자기소개</h5>
+            <!-- 줄 바꿈을 유지하기 위해 pre-wrap 스타일 사용 -->
             <div class="border p-3 rounded" style="white-space: pre-wrap;" th:text="${resume.selfIntroduction}"></div>
 
         </div>
     </div>
-
     <div th:unless="${resume}" class="alert alert-warning">
         작성된 이력서 내용이 없습니다.
     </div>
-
-    <a th:if="${resume}" th:href="@{|/resume/modify/${resume.id}|}" class="btn btn-warning mt-3 me-2">📝 수정</a>
-    <a th:if="${resume}" th:href="@{|/resume/delete/${resume.id}|}" class="btn btn-danger mt-3 me-2"
-       onclick="return confirm('정말로 이 이력서를 삭제하시겠습니까?');">🗑️ 삭제</a>
-
-    <a th:href="@{/resume/list}" class="btn btn-secondary mt-3 me-2">목록으로 돌아가기</a>
     <a th:href="@{/resume/create}" class="btn btn-secondary mt-3 me-2">새 이력서 작성</a>
     <a href="/" class="btn btn-outline-primary mt-3">홈으로 돌아가기</a>
 </div>
