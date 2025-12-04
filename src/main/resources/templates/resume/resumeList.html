@@ -5,46 +5,48 @@
       layout:decorate="~{layouts/layout}">
 
 <div layout:fragment="content" class="container my-3">
-    <div class="row">
-        <div class="col-8">
-            <h2 class="border-bottom py-2">💼 이력서 목록</h2>
-        </div>
-        <div class="col-4 text-end">
-            <a th:href="@{/resume/create}" class="btn btn-primary">새 이력서 작성</a>
-        </div>
+
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+        <h2 class="h3 mb-0 text-primary">💼 이력서 목록</h2>
+        <a th:href="@{/resume/create}" class="btn btn-success shadow-sm">
+            <i class="bi bi-plus-circle me-1"></i> 새 이력서 작성
+        </a>
     </div>
 
+    <div th:if="${resumeList.isEmpty()}" class="alert alert-light text-center p-5 border-dashed">
+        <p class="mb-0 text-muted">작성된 이력서가 없습니다. 첫 이력서를 작성해 보세요! 📝</p>
+    </div>
 
-    <table class="table table-hover mt-3">
+    <table th:unless="${resumeList.isEmpty()}" class="table table-striped table-bordered table-hover mt-3 align-middle shadow-sm">
         <thead class="table-dark">
         <tr>
-            <th>번호</th>
-            <th style="width:30%">이름</th>               <th>주요 기술 스택</th>
-            <th>작성일</th>
-            <th style="width:15%">관리</th>               </tr>
+            <th class="text-center">#</th>
+            <th style="width:25%">이름</th>
+            <th style="width:35%">주요 기술 스택</th>
+            <th style="width:15%">작성일</th>
+            <th style="width:15%" class="text-center">관리</th>
+        </tr>
         </thead>
         <tbody>
         <tr th:each="resume, loop : ${resumeList}">
-            <td th:text="${loop.count}">1</td>
+            <td class="text-center" th:text="${loop.count}">1</td>
             <td>
-                <a th:href="@{|/resume/detail/${resume.id}|}" th:text="${resume.name}">홍길동</a>
+                <a th:href="@{|/resume/detail/${resume.id}|}" th:text="${resume.name}" class="fw-bold text-decoration-none text-dark">홍길동</a>
             </td>
-            <td th:text="${#strings.length(resume.techStack) > 30 ? #strings.substring(resume.techStack, 0, 30) + '...' : resume.techStack}">Java, Spring Boot, JPA...</td>
+            <td style="white-space: normal;" th:text="${#strings.length(resume.techStack) > 40 ? #strings.substring(resume.techStack, 0, 40) + '...' : resume.techStack}">Java, Spring Boot, JPA...</td>
 
-            <td th:text="${#temporals.format(resume.created, 'yyyy.MM.dd HH:mm')}">2023.11.15 14:30</td>
+            <td th:text="${#temporals.format(resume.created, 'yyyy.MM.dd HH:mm')}" class="text-muted">2023.11.15 14:30</td>
 
-            <td>
-                <a th:href="@{|/resume/modify/${resume.id}|}" class="btn btn-sm btn-outline-secondary me-1">수정</a>
-                <a th:href="@{|/resume/delete/${resume.id}|}" class="btn btn-sm btn-outline-danger"
-                   onclick="return confirm('정말로 이 이력서를 삭제하시겠습니까?');">삭제</a>
+            <td class="text-center">
+                <div class="btn-group btn-group-sm" role="group">
+                    <a th:href="@{|/resume/modify/${resume.id}|}" class="btn btn-outline-warning">수정</a>
+                    <a th:href="@{|/resume/delete/${resume.id}|}" class="btn btn-outline-danger"
+                       onclick="return confirm('정말로 이 이력서를 삭제하시겠습니까?');">삭제</a>
+                </div>
             </td>
         </tr>
         </tbody>
     </table>
-
-    <div th:if="${resumeList.isEmpty()}" class="alert alert-info text-center">
-        아직 작성된 이력서가 없습니다.
-    </div>
 
 </div>
 </html>

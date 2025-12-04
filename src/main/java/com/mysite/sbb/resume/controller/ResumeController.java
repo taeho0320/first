@@ -122,4 +122,5 @@ public class ResumeController {
         }
         return "redirect:/resume/list";
     }
+
 }
