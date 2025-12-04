@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content" class="container my-3">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="border-bottom py-2">💼 이력서 목록</h2>
+        </div>
+        <div class="col-4 text-end">
+            <a th:href="@{/resume/create}" class="btn btn-primary">새 이력서 작성</a>
+        </div>
+    </div>
+
+
+    <table class="table table-hover mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>번호</th>
+            <th style="width:50%">이름</th>
+            <th>주요 기술 스택</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resume, loop : ${resumeList}">
+            <td th:text="${loop.count}">1</td>
+            <td>
+                <a th:href="@{|/resume/detail/${resume.id}|}" th:text="${resume.name}">홍길동</a>
+            </td>
+            <td th:text="${#strings.length(resume.techStack) > 30 ? #strings.substring(resume.techStack, 0, 30) + '...' : resume.techStack}">Java, Spring Boot, JPA...</td>
+            <td th:text="${#temporals.format(resume.createDate, 'yyyy.MM.dd')}">2023.11.15</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${resumeList.isEmpty()}" class="alert alert-info text-center">
+        아직 작성된 이력서가 없습니다.
+    </div>
+
+</div>
+</html>
