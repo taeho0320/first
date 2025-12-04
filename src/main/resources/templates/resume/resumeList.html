@@ -31,7 +31,8 @@
                 <a th:href="@{|/resume/detail/${resume.id}|}" th:text="${resume.name}">홍길동</a>
             </td>
             <td th:text="${#strings.length(resume.techStack) > 30 ? #strings.substring(resume.techStack, 0, 30) + '...' : resume.techStack}">Java, Spring Boot, JPA...</td>
-            <td th:text="${#temporals.format(resume.createDate, 'yyyy.MM.dd')}">2023.11.15</td>
+
+            <td th:text="${#temporals.format(resume.created, 'yyyy.MM.dd HH:mm')}">2023.11.15 14:30</td>
         </tr>
         </tbody>
     </table>
