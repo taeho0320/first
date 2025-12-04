@@ -4,10 +4,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
 <div layout:fragment="content" class="container my-3">
-    <h2 class="border-bottom py-2">📝 이력서 작성</h2>
-    <form th:action="@{/resume/create}" th:object="${resumeDto}" method="post">
 
-        <!-- 이름 (Name) -->
+    <h2 class="border-bottom py-2"
+        th:text="${id != null ? '✏️ 이력서 수정' : '📝 이력서 작성'}">이력서 작성</h2>
+
+    <form th:action="${id != null ? '/resume/modify/' + id : '/resume/create'}" th:object="${resumeDto}" method="post">
+
         <div class="mb-3">
             <label for="name" class="form-label">이름</label>
             <input type="text" th:field="*{name}" class="form-control" placeholder="성명을 입력하세요">
@@ -16,7 +18,6 @@
             </div>
         </div>
 
-        <!-- 전화번호 (Phone) -->
         <div class="mb-3">
             <label for="phone" class="form-label">전화번호</label>
             <input type="text" th:field="*{phone}" class="form-control" placeholder="010-XXXX-XXXX">
@@ -25,7 +26,6 @@
             </div>
         </div>
 
-        <!-- 이메일 (Email) -->
         <div class="mb-3">
             <label for="email" class="form-label">이메일</label>
             <input type="email" th:field="*{email}" class="form-control" placeholder="example@domain.com">
@@ -34,7 +34,6 @@
             </div>
         </div>
 
-        <!-- 주요 기술 스택 (Tech Stack) -->
         <div class="mb-3">
             <label for="techStack" class="form-label">주요 기술 스택 (쉼표로 구분)</label>
             <textarea th:field="*{techStack}" class="form-control" rows="3" placeholder="예: Java, Spring Boot, JPA, Thymeleaf"></textarea>
@@ -43,7 +42,6 @@
             </div>
         </div>
 
-        <!-- 경력 사항 (Career Details) -->
         <div class="mb-3">
             <label for="careerDetails" class="form-label">경력 사항</label>
             <textarea th:field="*{careerDetails}" class="form-control" rows="5" placeholder="회사명, 직책, 기간, 주요 업무를 상세히 입력하세요."></textarea>
@@ -52,7 +50,6 @@
             </div>
         </div>
 
-        <!-- 자기소개 (Self Introduction) -->
         <div class="mb-3">
             <label for="selfIntroduction" class="form-label">자기소개</label>
             <textarea th:field="*{selfIntroduction}" class="form-control" rows="8" placeholder="자신을 자유롭게 소개하세요."></textarea>
@@ -61,7 +58,10 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary my-2">이력서 제출</button>
+        <button type="submit" class="btn btn-primary my-2"
+                th:text="${id != null ? '수정 완료' : '이력서 제출'}">이력서 제출</button>
+
+        <a th:href="@{/resume/list}" class="btn btn-outline-secondary my-2">취소</a>
     </form>
 </div>
 

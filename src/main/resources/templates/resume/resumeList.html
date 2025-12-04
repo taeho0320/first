@@ -19,10 +19,9 @@
         <thead class="table-dark">
         <tr>
             <th>번호</th>
-            <th style="width:50%">이름</th>
-            <th>주요 기술 스택</th>
+            <th style="width:30%">이름</th>               <th>주요 기술 스택</th>
             <th>작성일</th>
-        </tr>
+            <th style="width:15%">관리</th>               </tr>
         </thead>
         <tbody>
         <tr th:each="resume, loop : ${resumeList}">
@@ -33,6 +32,12 @@
             <td th:text="${#strings.length(resume.techStack) > 30 ? #strings.substring(resume.techStack, 0, 30) + '...' : resume.techStack}">Java, Spring Boot, JPA...</td>
 
             <td th:text="${#temporals.format(resume.created, 'yyyy.MM.dd HH:mm')}">2023.11.15 14:30</td>
+
+            <td>
+                <a th:href="@{|/resume/modify/${resume.id}|}" class="btn btn-sm btn-outline-secondary me-1">수정</a>
+                <a th:href="@{|/resume/delete/${resume.id}|}" class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('정말로 이 이력서를 삭제하시겠습니까?');">삭제</a>
+            </td>
         </tr>
         </tbody>
     </table>
